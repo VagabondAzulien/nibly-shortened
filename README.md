@@ -64,3 +64,42 @@ thought I was. Though I do work regularly with the language, I tend to rely on
 documentation and examples. For this exercise, I tried to refrain from
 explicitly looking up examples or suggestions, and relied only on the official
 Python documentation.
+
+# Post-Post-Mortem: More Work
+
+After the above write-up, and a bit of food, I returned to this project to see
+what I could finish in another 4 hours, for 5 hours total. Here's where it
+stands:
+
+- It works! That's a step up from the previous iteration.
+- Can be built into a Docker imag, or run from the Pipenv virtual environment
+- The routes, while not perfect, better capture the intention:
+  - The root route loads a web page with an HTTP form, the functionality of
+      which leverages the api routes
+  - The `/api/v1/shorten/<url>` endpoint will return a URL using the row ID in 
+      the DB. It will also check if the provided URL already exists based on 
+      MD5 hash
+  - Both `/api` endpoints will return JSON when applicable, and otherwise will
+      return plain text. XML is also planned, but not implemented.
+  - The `/to/<id>` endpoint redirects accordingly.
+
+There are still several things missing, or otherwise lacking:
+
+- There is no logging
+- There is no error handling (no _real_ error handling)
+- The routes could deal with being better serialized
+- I would still prefer an ORM to using SQL statements in-line (perhaps Peewee?)
+- A better identifier than the DB row ID seems ideal
+- This README needs to be properly formatted
+
+Given the above, I would say this application is another 3-4 hours away from
+completion. With better error handling and a better identifier for the shortened
+URL, I would feel comfortable deploying this to my personal VPS. 
+
+# Licenses / Copyrights / Contact
+
+All code is [Unlicensed](https://unlicense.org), unless otherwise noted for the
+individual files.
+
+The easiest way to contact me is via Matrix, I'm
+[Vagabond](https://matrix.to/#/@vagabondazulien:exp.farm).
